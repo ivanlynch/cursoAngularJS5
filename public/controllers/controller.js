@@ -2,76 +2,71 @@
 angular.module("TodoList", ['LocalStorageModule'])
 
     /* Declaramos el servicio y le pasamos como parámetro un servicio*/
-    .factory('TodoService', function (localStorageService) {
-
-        /* Declaramos un objeto vacio */
-        var todoService = {};
+    .service('TodoService', function (localStorageService) {
 
         /* Definimos las propiedades del objeto */
-        todoService.key = "angular-todolist";
+        this.key = "angular-todolist";
 
         /* Aca definimos que si ya tiene una key nos devuelva los valores */
-        if(localStorageService.get(todoService.key)){
+        if(localStorageService.get(this.key)){
 
-            todoService.activities = localStorageService.get(todoService.key);
+            this.activities = localStorageService.get(this.key);
 
         }else{
 
             /* Si no tiene una key, que inicialice la colección  */
-            todoService.activities = [];
+            this.activities = [];
         }
 
         /* Creamos un método para agregar registros */
-        todoService.add = function (newActividad) {
+        this.add = function (newActividad) {
 
             /* Acá le hacemos push dentro de nuestra colección  */
-            todoService.activities.push(newActividad);
+            this.activities.push(newActividad);
         };
 
         /* Definimos un método para que haga un update de la colección */
-        todoService.updateLocalStorage = function () {
+        this.updateLocalStorage = function () {
 
           /* le pasamos al local storage la key y las actividades */
-          localStorageService.set(todoService.key, todoService.activities);
+          localStorageService.set(this.key, this.activities);
         };
 
         /* Definimos un motodo para limpiar la memoria */
-        todoService.clean = function () {
+        this.clean = function () {
 
           /* Declaramos que el servicio es igual a una coleccion vacia */
-          todoService.activities = [];
+            this.activities = [];
 
           /* Luego de vaciar la coleccion hacemos el update para que quede vacia*/
-          todoService.updateLocalStorage();
+            this.updateLocalStorage();
 
           /* Devolvemos la coleccion vacia*/
-          return todoService.getAll();
+          return this.getAll();
         };
 
         /* Pedimos todos los valores de la coleccion */
-        todoService.getAll = function () {
-            return todoService.activities;
+        this.getAll = function () {
+            return this.activities;
         };
 
         /* Definimos un método para eliminar registros */
-        todoService.remove = function (item) {
+        this.remove = function (item) {
 
             /* A la coleccion de actividades le pasamos la función filter que recibe como parámetro
              una función, a esa función le pasamos como parámetro el nombre de la actividad */
-            todoService.activities = todoService.activities.filter(function (itemActivity) {
+            this.activities = this.activities.filter(function (itemActivity) {
                 /* Retorna todo lo que no sea igual a la actividad  */
                 return itemActivity !== item;
             });
 
             /* Updateamos la colección */
-            todoService.updateLocalStorage();
+            this.updateLocalStorage();
 
             /* Devolvemos la colección*/
-            return todoService.getAll();
+            return this.getAll();
         };
 
-        /* Retornamos la funcion */
-        return todoService;
     })
 
     /* Declaramos el controlador al cual le pasamos el nombre y una funcion que recibe dos parametros
