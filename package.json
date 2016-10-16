@@ -1,0 +1,24 @@
+{
+  "name": "cursoangularjs",
+  "version": "1.0.0",
+  "description": "Curso Angular JS",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivanlynch/cursoAngularJS.git"
+  },
+  "author": "I�ván Lynch",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ivanlynch/cursoAngularJS/issues"
+  },
+  "homepage": "https://github.com/ivanlynch/cursoAngularJS#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "jade": "^1.11.0",
+    "nodemon": "^1.11.0"
+  }
+}

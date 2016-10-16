@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!-- Declaramos el nombre del modulo de angular que vamos a utilizar para esta vista -->
+<html lang="en" ng-app="TodoList">
+<head>
+    <meta charset="UTF-8">
+    <title> Curso AngularJS </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="../controllers/controller.js"></script>
+    <script src="../controllers/angular-local-storage.min.js"></script>
+</head>
+<!--  Le decimos a la vista que en el body use el controlador TodoController declarado en controller.js -->
+<body ng-controller="TodoController">
+    <h1>Curso AngularJS con Node</h1>
+    <!-- Usando ng-repeat declaramos un foreach para itere sobre toda la colección creada en el controlador -->
+    <ul>
+        <li ng-repeat="actividad in todo">
+            {{actividad.descripcion}} - {{actividad.fecha | date: 'short'}} -
+            <a href="#" ng-click="removeActivities(actividad)" style="color: darkred">x</a>
+        </li>
+    </ul>
+
+    <!-- Declaramos el form que vamos a ver en el cliente -->
+    <form ng-submit="addActividad()">
+        <input type="text" ng-model="newActividad.descripcion">
+        <input type="datetime-local" ng-model="newActividad.fecha">
+        <input type="submit" value="Guardar Actividad">
+    </form>
+    <button ng-click="clean()">Limpiar</button>
+
+</body>
+</html>
