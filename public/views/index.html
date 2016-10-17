@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Curso AngularJS</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-    <script src="../controllers/controller.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
     <style>
         .circular{
             border-radius: 50%;
@@ -14,15 +14,26 @@
             height: 100px;
             display: inline-block;
         }
+        .no-list li{
+            list-style-type: none;
+        }
+        body, html{
+            text-align: center;
+            background-color: #EEE;
+            margin: 0px;
+        }
     </style>
-
+    <link rel="stylesheet" href="../../angularjs/custom-directives-2/autocomplete-jquery-ui.structure.css">
+    <script src="../../angularjs/custom-directives-2/autocomplete-jquery-ui.js"></script>
+    <script src="../controllers/controller.js"></script>
 
 </head>
 <body ng-controller="AppCtrl">
+    <input type="text" my-autocomplete="repos" placeholder="Buscar repositorio">
     <ul class="no-list" ng-cloak>
-        <li ng-repeat="repo in repos">
+        <li ng-repeat="repo in posts" ng-hide="main_repo && main_repo != repo.name">
             <div class="circular" back-img="{{repo.owner.avatar_url}}"></div>
-            <h1>{{repo.name}}</h1>
+            <h1 class="inline-block">{{repo.full_name}}</h1>
         </li>
     </ul>
 </body>
