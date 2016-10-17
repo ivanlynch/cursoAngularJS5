@@ -8,7 +8,7 @@ angular.module('CustomDirective', [])
     .directive('myAutocomplete', function () {
         function  link(scope, element, attrs) {
                $(element).autocomplete({
-                  source: scope.$eval[attrs.myAutocomplete],
+                  source: scope.$eval(attrs.myAutocomplete),
                   select: function(ev, ui) {
                       ev.preventDefault();
                       if(ui.item){
@@ -20,7 +20,7 @@ angular.module('CustomDirective', [])
                       $(this).val(ui.item.label);
                   }
                });
-        };
+        }
 
         return {
             link: link
@@ -70,8 +70,6 @@ angular.module('CustomDirective', [])
                     var repo = data[i];
                     $scope.repos.push(repo.name);
                 }
-
-                console.log($scope.repos.length);
             })
             /*
                 En caso de error le decimos que nos muestre en consola el error.
